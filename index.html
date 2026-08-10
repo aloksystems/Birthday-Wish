@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#08090D">
+<title>A Little Birthday Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<button id="musicBtn" class="music-btn" aria-label="Turn on music">
+  <span class="ico">♪</span><span class="lbl">Sound off</span>
+</button>
+
+<div id="app">
+
+  <section class="screen active" id="s-intro">
+    <div class="center">
+      <p class="kicker">✦ a little something ✦</p>
+      <h1 class="intro-name" data-name></h1>
+      <p class="sub">Something is waiting for you...</p>
+    </div>
+  </section>
+
+  <section class="screen" id="s-hello">
+    <div class="center">
+      <p class="big-line" id="h1">Hey...</p>
+      <p class="big-line gold" id="h2" data-name></p>
+      <p class="big-line" id="h3">It's your day.</p>
+      <button class="btn primary hidden" id="helloBtn">Continue →</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-type">
+    <div class="center pad">
+      <p class="typewriter" id="typeText"></p>
+      <button class="btn primary hidden" id="typeBtn">✨ Continue</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-reveal">
+    <div class="center">
+      <div class="reveal-title">
+        <span class="word">HAPPY</span>
+        <span class="word">BIRTHDAY</span>
+      </div>
+      <h1 class="reveal-name" id="revealName" data-name-upper></h1>
+      <div class="cake-wrap" id="revealCake">
+        <div class="cake">
+          <div class="candles">
+            <div class="candle"><div class="flame"></div><div class="wick"></div><div class="stick"></div></div>
+            <div class="candle"><div class="flame"></div><div class="wick"></div><div class="stick"></div></div>
+            <div class="candle"><div class="flame"></div><div class="wick"></div><div class="stick"></div></div>
+          </div>
+          <div class="layer layer-top"></div>
+          <div class="layer layer-bottom"></div>
+          <div class="plate"></div>
+        </div>
+      </div>
+      <button class="btn primary hidden" id="moreBtn">There's more...</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-cards">
+    <div class="center">
+      <p class="section-head">Three things worth saying</p>
+      <div class="cards">
+        <button class="card" data-msg="smile"><span class="emo">🌸</span><span class="card-t">For your smile</span><span class="arrow">→</span></button>
+        <button class="card" data-msg="future"><span class="emo">✨</span><span class="card-t">For your future</span><span class="arrow">→</span></button>
+        <button class="card" data-msg="today"><span class="emo">🫶</span><span class="card-t">For today</span><span class="arrow">→</span></button>
+      </div>
+      <button class="btn primary" id="cardsBtn">Okay, what else?</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-surprise">
+    <div class="center">
+      <p class="section-head">Choose your birthday surprise</p>
+      <div class="cards">
+        <button class="card" data-s="message"><span class="emo">💌</span><span class="card-t">A Message</span><span class="arrow">→</span></button>
+        <button class="card" data-s="gift"><span class="emo">🎁</span><span class="card-t">A Surprise</span><span class="arrow">→</span></button>
+        <button class="card" data-s="night"><span class="emo">🌙</span><span class="card-t">One Last Thing</span><span class="arrow">→</span></button>
+      </div>
+      <button class="btn primary" id="surpriseBtn">That's not all...</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-game">
+    <div class="center game-wrap">
+      <p class="level-chip" id="levelChip">Level 1 · 3</p>
+      <h2 class="level-title" id="levelTitle">🎂 Find the birthday cake</h2>
+      <p class="level-hint" id="levelHint">It's hiding on this screen. Tap around until you find it.</p>
+      <div class="stage" id="gameStage">
+        <div id="cakeFind" class="toy-cake">
+          <div class="candle"><div class="flame"></div><div class="wick"></div><div class="stick"></div></div>
+          <div class="toy-layer top"></div>
+          <div class="toy-layer bottom"></div>
+        </div>
+        <div id="wishCandle" class="wish">
+          <div class="candle"><div class="flame big" id="wishFlame"></div><div class="wick"></div><div class="stick tall"></div></div>
+        </div>
+        <div id="giftBox" class="gift">
+          <div class="gift-lid"></div>
+          <div class="gift-body"></div>
+        </div>
+      </div>
+      <p class="level-result hidden" id="levelResult"></p>
+      <button class="btn primary hidden" id="levelNext">Next →</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-final">
+    <div class="center pad">
+      <p class="small-line" id="f1">One last thing.</p>
+      <p class="final-msg" id="f2">I hope this year gives you more reasons to smile, more moments worth remembering, and a lot of happiness.</p>
+      <h1 class="final-name" id="f3"><span class="heart">Happy Birthday,</span> <span data-name></span> 🤍</h1>
+      <p class="sig" id="f4">— From <span data-from></span></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="overlay" id="o-card">
+  <div class="overlay-box">
+    <button class="overlay-close" aria-label="Close">✕</button>
+    <p class="overlay-kicker"></p>
+    <p class="overlay-text"></p>
+  </div>
+</div>
+
+<div class="overlay" id="o-surprise">
+  <div class="overlay-box">
+    <button class="overlay-close" aria-label="Close">✕</button>
+    <p class="overlay-kicker"></p>
+    <p class="overlay-text"></p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

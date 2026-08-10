@@ -1,0 +1,401 @@
+:root{
+  --bg:#08090D;
+  --bg-2:#0D0E14;
+  --lavender:#B8B0F7;
+  --lavender-soft:rgba(184,176,247,.35);
+  --gold:#E8C37A;
+  --white:#F5F3FF;
+  --muted:#8A8A96;
+  --line:rgba(245,243,255,.09);
+  --glass:rgba(255,255,255,.035);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+html,body{height:100%}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:300;
+  overflow:hidden;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+#bg{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+
+/* ---------- App / screens ---------- */
+#app{position:fixed;inset:0;z-index:1}
+
+.screen{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:28px 22px calc(28px + env(safe-area-inset-bottom));
+  opacity:0;visibility:hidden;
+}
+
+.screen.active{visibility:visible;opacity:1}
+
+.center{text-align:center;width:100%;max-width:470px}
+
+.pad{padding-top:10px}
+
+.hidden{display:none !important}
+
+/* ---------- Typography ---------- */
+h1,h2{font-family:'Playfair Display',serif;font-weight:600}
+
+.kicker{
+  font-size:11px;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:22px;
+}
+
+.intro-name{
+  font-size:clamp(56px,18vw,92px);
+  line-height:1.05;
+  background:linear-gradient(120deg,#fff 10%,var(--lavender) 45%,var(--gold) 90%);
+  background-size:220% 220%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:nameSheen 7s ease-in-out infinite;
+  margin-bottom:18px;
+}
+@keyframes nameSheen{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+
+.sub{color:var(--muted);font-size:14px;letter-spacing:.05em;margin-bottom:36px}
+
+/* ---------- Buttons ---------- */
+.btn{
+  appearance:none;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-weight:500;font-size:13px;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--bg);
+  background:linear-gradient(120deg,var(--lavender),var(--gold));
+  padding:15px 34px;border-radius:999px;
+  box-shadow:0 8px 30px rgba(184,176,247,.25);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.btn:active{transform:scale(.96)}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 44px rgba(184,176,247,.45);
+}
+
+#enterBtn{animation:pulseGlow 2.4s ease-in-out infinite}
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 8px 30px rgba(184,176,247,.25)}
+  50%{box-shadow:0 8px 48px rgba(184,176,247,.6)}
+}
+
+.btn.ghost{
+  background:transparent;color:var(--white);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+/* ---------- Hello ---------- */
+.big-line{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,11vw,58px);
+  font-weight:500;line-height:1.2;margin:10px 0;
+  opacity:0;transform:translateY(16px);
+}
+.big-line.gold{color:var(--gold)}
+
+/* ---------- Typewriter ---------- */
+.typewriter{
+  font-size:clamp(17px,4.6vw,21px);
+  line-height:1.75;color:var(--white);
+  min-height:140px;text-align:left;
+  max-width:400px;margin:0 auto 30px;
+}
+.typewriter::after{
+  content:'';display:inline-block;width:2px;height:1em;
+  background:var(--gold);margin-left:3px;vertical-align:-.15em;
+  animation:blink 1s steps(1) infinite;
+}
+.typewriter.done::after{display:none}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- Reveal ---------- */
+.reveal-title{
+  display:flex;flex-direction:column;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,10vw,54px);font-weight:600;line-height:1.1;
+  margin-bottom:16px;
+}
+.word{
+  opacity:0;
+  background:linear-gradient(120deg,var(--gold),#fff,var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 26px rgba(232,195,122,.35));
+}
+
+.reveal-name{
+  font-size:clamp(40px,13vw,72px);font-weight:600;
+  color:var(--lavender);
+  text-shadow:0 0 40px rgba(184,176,247,.55);
+  margin-bottom:8px;
+  opacity:0;
+}
+
+.cake-wrap{opacity:0;margin:14px 0 6px;transform:translateY(60px)}
+
+.cake{position:relative;width:220px;height:150px;margin:0 auto}
+
+.candles{position:absolute;top:-34px;left:0;width:100%;display:flex;justify-content:space-around;padding:0 30px;z-index:2}
+
+.candle{position:relative;width:14px}
+
+.flame{
+  position:absolute;left:50%;bottom:26px;
+  width:13px;height:18px;transform:translateX(-50%);
+  border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%,#fff7e0,var(--gold) 55%,transparent 90%);
+  box-shadow:0 0 18px 4px rgba(232,195,122,.55);
+  transform-origin:bottom center;
+  animation:flick .18s ease-in-out infinite alternate;
+}
+@keyframes flick{
+  0%{transform:translateX(-50%) scale(1) rotate(-2deg)}
+  100%{transform:translateX(-50%) scale(1.12,.96) rotate(2deg)}
+}
+
+.wick{
+  position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
+  width:2px;height:6px;background:#3a3540;
+}
+
+.stick{
+  position:absolute;left:50%;bottom:6px;transform:translateX(-50%);
+  width:4px;height:20px;
+  background:repeating-linear-gradient(-45deg,var(--gold) 0 2px,#cfa24f 2px 4px);
+  border-radius:2px;
+}
+.stick.tall{height:30px;bottom:0}
+
+.layer{
+  position:absolute;left:50%;transform:translateX(-50%);
+  border-radius:10px;
+}
+.layer-top{
+  bottom:46px;width:130px;height:38px;
+  background:linear-gradient(180deg,#c9c2ff,#a49bf0);
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.15), 0 6px 18px rgba(0,0,0,.4);
+}
+.layer-top::after{
+  content:'';position:absolute;top:12px;left:14px;right:14px;height:6px;
+  background:rgba(255,255,255,.25);border-radius:999px;
+}
+.layer-bottom{
+  bottom:12px;width:170px;height:42px;
+  background:linear-gradient(180deg,var(--gold),#d9a95f);
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.12), 0 10px 24px rgba(0,0,0,.5);
+}
+.plate{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:196px;height:18px;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));
+  box-shadow:0 4px 14px rgba(0,0,0,.55);
+}
+
+/* ---------- Cards ---------- */
+.section-head{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,6.4vw,30px);font-weight:500;
+  margin-bottom:26px;line-height:1.3;
+}
+
+.cards{display:flex;flex-direction:column;gap:14px;margin-bottom:34px}
+
+.card{
+  appearance:none;border:1px solid var(--line);cursor:pointer;
+  display:flex;align-items:center;gap:14px;
+  background:var(--glass);
+  backdrop-filter:blur(6px);
+  padding:18px 18px;border-radius:16px;
+  color:var(--white);text-align:left;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:400;
+  transition:transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.card:active{transform:scale(.97)}
+.card:hover{border-color:rgba(232,195,122,.4);transform:translateY(-2px);box-shadow:0 12px 36px rgba(184,176,247,.2)}
+
+.emo{font-size:24px;line-height:1}
+.card-t{flex:1;letter-spacing:.02em}
+.arrow{color:var(--gold);opacity:.8;transition:transform .25s ease}
+.card:hover .arrow{transform:translateX(4px)}
+
+/* ---------- Game ---------- */
+.game-wrap{max-width:430px}
+
+.level-chip{
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+
+.level-title{
+  font-size:clamp(24px,7vw,34px);font-weight:600;margin-bottom:10px;
+}
+
+.level-hint{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:26px}
+
+.stage{
+  position:relative;
+  width:100%;height:320px;
+  border:1px dashed rgba(245,243,255,.12);
+  border-radius:18px;
+  background:radial-gradient(ellipse at 50% 60%,rgba(184,176,247,.06),transparent 70%);
+  overflow:hidden;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+/* hide game toys until their level */
+.toy-cake,.wish,.gift{position:absolute;display:none}
+
+.toy-cake{left:40%;top:30%}
+.toy-cake .candle{width:10px}
+.toy-cake .flame{width:10px;height:14px;bottom:22px}
+.toy-cake .stick{height:16px}
+.toy-layer{
+  position:absolute;left:50%;transform:translateX(-50%);border-radius:8px;
+}
+.toy-cake .toy-layer.top{
+  bottom:30px;width:70px;height:22px;
+  background:linear-gradient(180deg,#c9c2ff,#a49bf0);
+}
+.toy-cake .toy-layer.bottom{
+  bottom:8px;width:96px;height:26px;
+  background:linear-gradient(180deg,var(--gold),#d9a95f);
+}
+
+.wish{left:50%;top:42%;transform:translateX(-50%)}
+.wish .candle{width:18px}
+.wish .flame.big{width:26px;height:34px;bottom:38px;box-shadow:0 0 34px 10px rgba(232,195,122,.65)}
+.wish .wick{bottom:34px;height:7px}
+.wish .stick{width:6px;height:38px}
+
+.gift{left:50%;top:55%;transform:translateX(-50%)}
+.gift-lid{
+  position:absolute;left:50%;top:-24px;transform:translateX(-50%);
+  width:92px;height:26px;border-radius:6px;
+  background:linear-gradient(180deg,#a49bf0,#857bd8);
+  z-index:2;
+}
+.gift-body{
+  position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:78px;height:62px;border-radius:6px;
+  background:linear-gradient(180deg,#c9c2ff,#9c92e6);
+  box-shadow:0 10px 24px rgba(0,0,0,.45);
+}
+.gift-lid::after,.gift-body::after{
+  content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:12px;height:100%;background:var(--gold);
+}
+.gift-lid::after{top:-2px;height:calc(100% + 4px)}
+
+.level-result{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(19px,5vw,24px);
+  color:var(--lavender);
+  margin:22px 0 4px;min-height:30px;
+}
+
+/* ---------- Final ---------- */
+.small-line{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,7vw,36px);color:var(--gold);
+  margin-bottom:26px;opacity:0;
+}
+
+.final-msg{
+  font-size:clamp(17px,4.6vw,21px);line-height:1.9;
+  color:var(--white);max-width:430px;margin:0 auto 40px;opacity:0;
+}
+
+.final-name{
+  font-size:clamp(30px,9vw,48px);font-weight:600;line-height:1.25;
+  color:var(--lavender);
+  text-shadow:0 0 46px rgba(184,176,247,.5);
+  margin-bottom:24px;opacity:0;
+}
+.final-name .heart{color:var(--white);display:block}
+
+.sig{
+  font-family:'Caveat',cursive;
+  font-size:clamp(26px,7vw,34px);color:var(--gold);opacity:0;
+}
+
+/* ---------- Overlays ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:3;
+  display:flex;align-items:center;justify-content:center;
+  padding:30px 24px;
+  background:rgba(4,5,8,.82);
+  backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;
+}
+.overlay.show{visibility:visible}
+
+.overlay-box{
+  position:relative;width:100%;max-width:430px;
+  background:linear-gradient(160deg,rgba(20,20,32,.9),rgba(12,12,20,.92));
+  border:1px solid var(--line);
+  border-radius:20px;padding:40px 28px 34px;
+  text-align:center;
+}
+.overlay-kicker{
+  font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.overlay-text{
+  font-size:clamp(17px,4.6vw,20px);line-height:1.85;color:var(--white);
+}
+.overlay-close{
+  position:absolute;top:14px;right:16px;
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);font-size:18px;padding:6px;
+  transition:color .25s ease;
+}
+.overlay-close:hover{color:var(--white)}
+
+/* ---------- Music button ---------- */
+.music-btn{
+  position:fixed;top:calc(14px + env(safe-area-inset-top));right:14px;z-index:5;
+  display:flex;align-items:center;gap:8px;
+  background:var(--glass);border:1px solid var(--line);
+  color:var(--muted);border-radius:999px;
+  padding:9px 15px;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.15em;
+  transition:color .25s ease, border-color .25s ease;
+}
+.music-btn .ico{font-size:15px;color:var(--gold);opacity:.55}
+.music-btn.on{color:var(--white);border-color:rgba(232,195,122,.5)}
+.music-btn.on .ico{opacity:1}
+
+/* ---------- FX ---------- */
+.confetti{
+  position:fixed;top:-20px;z-index:4;pointer-events:none;
+  width:8px;height:14px;border-radius:2px;
+}
+
+.spark{
+  position:fixed;z-index:6;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#fff,var(--gold) 60%,transparent 90%);
+  box-shadow:0 0 14px 2px rgba(232,195,122,.5);
+}
+
+@media (min-width:700px){
+  .screen{padding:40px}
+  .card:hover{transform:translateY(-3px)}
+}
