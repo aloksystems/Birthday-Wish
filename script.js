@@ -7,8 +7,8 @@
 
   /* ---------- Config : personalize here ---------- */
   var CONFIG = {
-    name: 'Saniya',
-    from: 'Aditya'
+    name: 'Birthday',
+    from: 'Boy'
   };
 
   /* ---------- Utils ---------- */
